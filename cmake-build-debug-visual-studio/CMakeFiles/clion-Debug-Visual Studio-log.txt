@@ -1,0 +1,21 @@
+C:\Users\320174546\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8617.54\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/320174546/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/win/x64/ninja.exe -G Ninja -S C:\Dev\RTC-stack-poc -B C:\Dev\RTC-stack-poc\cmake-build-debug-visual-studio
+CMake Error at DemoSink/CMakeLists.txt:13 (find_package):
+  By not providing "FindQt5Widgets.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "Qt5Widgets", but CMake did not find one.
+
+  Could not find a package configuration file provided by "Qt5Widgets" with
+  any of the following names:
+
+    Qt5WidgetsConfig.cmake
+    qt5widgets-config.cmake
+
+  Add the installation prefix of "Qt5Widgets" to CMAKE_PREFIX_PATH or set
+  "Qt5Widgets_DIR" to a directory containing one of the above files.  If
+  "Qt5Widgets" provides a separate development package or SDK, be sure it has
+  been installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "C:/Dev/RTC-stack-poc/cmake-build-debug-visual-studio/CMakeFiles/CMakeOutput.log".
+See also "C:/Dev/RTC-stack-poc/cmake-build-debug-visual-studio/CMakeFiles/CMakeError.log".

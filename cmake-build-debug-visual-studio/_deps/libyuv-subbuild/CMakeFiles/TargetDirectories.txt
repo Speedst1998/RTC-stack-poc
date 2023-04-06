@@ -1,0 +1,3 @@
+C:/Dev/RTC-stack-poc/cmake-build-debug-visual-studio/_deps/libyuv-subbuild/CMakeFiles/libyuv-populate.dir
+C:/Dev/RTC-stack-poc/cmake-build-debug-visual-studio/_deps/libyuv-subbuild/CMakeFiles/edit_cache.dir
+C:/Dev/RTC-stack-poc/cmake-build-debug-visual-studio/_deps/libyuv-subbuild/CMakeFiles/rebuild_cache.dir

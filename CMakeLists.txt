@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.20)
 project(effective-parakeet)
 
 SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -15,7 +15,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     #        <http://msdn.microsoft.com/en-us/library/hsyx7kbz.aspx>
 endif ()
 
-add_subdirectory(Vendor/libyuv)
+#add_subdirectory(Vendor/libyuv)
 
 add_subdirectory(RtpTransportInterface)
 add_subdirectory(RtpPacketizationInterface)
