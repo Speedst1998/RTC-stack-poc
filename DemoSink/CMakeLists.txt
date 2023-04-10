@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 project(DemoSink)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "C:\\Qt\\Tools\\CMake_64\\share\\cmake-3.24\\Modules")
+
+# Select location of your cmake configuration files for Qt installation on your system
+if (WIN32)
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "C:\\Qt\\5.15.2\\msvc2019_64\\lib\\cmake")
+endif()
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
