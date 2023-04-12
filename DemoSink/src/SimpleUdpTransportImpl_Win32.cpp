@@ -58,7 +58,6 @@ std::error_code SimpleUdpTransportImpl_Win32::ListenOn(uint16_t port) {
 	struct addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_UDP;
 	hints.ai_flags = AI_PASSIVE;
 	std::ostringstream ss;
