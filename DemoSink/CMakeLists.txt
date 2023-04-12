@@ -8,6 +8,7 @@ endif()
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_VERBOSE_MAKEFILE ON )
 
 # As moc files are generated in the binary dir, tell CMake
 # to always look for includes there:
@@ -86,3 +87,17 @@ endif()
 add_executable(DemoSink ${SRCS} )
 target_include_directories(DemoSink PUBLIC ${libyuv_SOURCE_DIR}/include ${libvpx_SOURCE_DIR})
 target_link_libraries(DemoSink PUBLIC RtpRtcp Qt5::Widgets ${LIBS})
+
+add_custom_command(
+    TARGET DemoSink POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+    $<TARGET_FILE:Qt5::Widgets> 
+    $<TARGET_FILE:Qt5::Gui> 
+    $<TARGET_FILE:Qt5::Core>  
+    $<TARGET_FILE_DIR:DemoSink>     
+)
+
+
+add_custom_command(
+    TARGET DemoSink POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "C:\\Qt\\5.15.2\\msvc2019_64\\plugins\\platforms" $<TARGET_FILE_DIR:DemoSink>/platforms)

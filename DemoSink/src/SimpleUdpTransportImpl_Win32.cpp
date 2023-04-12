@@ -1,7 +1,7 @@
 
 #include "SimpleUdpTransportImpl_Win32.h"
 #include <iostream>
-
+#include <sstream>
 #define WIN32_LEAN_AND_MEAN
 
 #include "winsock2.h"
@@ -61,7 +61,9 @@ std::error_code SimpleUdpTransportImpl_Win32::ListenOn(uint16_t port) {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_UDP;
 	hints.ai_flags = AI_PASSIVE;
-	int iResult = getaddrinfo(NULL, "54554", &hints, &result);
+	std::ostringstream ss;
+	ss << port << std::ends;
+	int iResult = getaddrinfo(NULL, ss.str().c_str(), &hints, &result);
 	if (iResult != 0) {
 		std::cout << "getaddrinfo failed: " << iResult << std::endl;
 		WSACleanup();
