@@ -46,7 +46,7 @@ namespace rtp {
 
         void SetExtensionFlag(bool i) { extensions = i; }
 
-        ssize_t CsrcCount() { return cc; }
+        size_t CsrcCount() { return cc; }
 
         size_t PayloadLength() const { return payload.size(); }
 

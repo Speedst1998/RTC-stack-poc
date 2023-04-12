@@ -8,35 +8,22 @@
 #define vpx_dx_interface (vpx_codec_vp8_dx())
 
 namespace {
+    static const char* vpx_format_to_string(vpx_img_fmt_t f) {
+        switch (f) {
+        case VPX_IMG_FMT_I420: return "I420";
+        case VPX_IMG_FMT_I422: return "I422";
+        case VPX_IMG_FMT_I444: return "I444";
+        case VPX_IMG_FMT_I440: return "I440";
+        case VPX_IMG_FMT_YV12: return "YV12";
+        case VPX_IMG_FMT_I42016: return "I42016";
+        case VPX_IMG_FMT_I42216: return "I42216";
+        case VPX_IMG_FMT_I44416: return "I44416";
+        case VPX_IMG_FMT_I44016: return "I44016";
+        default: return "Other";
+        }
+    }
     void printFmt(vpx_img_fmt_t fmt) {
-      switch (fmt) {
-        case VPX_IMG_FMT_NONE: qDebug() << "Format: IMG_FMT_NONE"; break;
-        case VPX_IMG_FMT_RGB24: qDebug() << "Format: IMG_FMT_RGB24"; break;
-        case VPX_IMG_FMT_RGB32: qDebug() << "Format: IMG_FMT_RGB32"; break;
-        case VPX_IMG_FMT_RGB565: qDebug() << "Format: IMG_FMT_RGB565"; break;
-        case VPX_IMG_FMT_RGB555: qDebug() << "Format: IMG_FMT_RGB555"; break;
-        case VPX_IMG_FMT_UYVY: qDebug() << "Format: IMG_FMT_UYVY"; break;
-        case VPX_IMG_FMT_YUY2: qDebug() << "Format: IMG_FMT_YUY2"; break;
-        case VPX_IMG_FMT_YVYU: qDebug() << "Format: IMG_FMT_YVYU"; break;
-        case VPX_IMG_FMT_BGR24: qDebug() << "Format: IMG_FMT_BGR24"; break;
-        case VPX_IMG_FMT_RGB32_LE: qDebug() << "Format: IMG_FMT_RGB32_LE"; break;
-        case VPX_IMG_FMT_ARGB: qDebug() << "Format: IMG_FMT_ARGB"; break;
-        case VPX_IMG_FMT_ARGB_LE: qDebug() << "Format: IMG_FMT_ARGB_LE"; break;
-        case VPX_IMG_FMT_RGB565_LE: qDebug() << "Format: IMG_FMT_RGB565_LE"; break;
-        case VPX_IMG_FMT_RGB555_LE: qDebug() << "Format: IMG_FMT_RGB555_LE"; break;
-        case VPX_IMG_FMT_YV12: qDebug() << "Format: IMG_FMT_YV12"; break;
-        case VPX_IMG_FMT_I420: qDebug() << "Format: IMG_FMT_I420"; break;
-        case VPX_IMG_FMT_VPXYV12: qDebug() << "Format: IMG_FMT_VPXYV12"; break;
-        case VPX_IMG_FMT_VPXI420: qDebug() << "Format: IMG_FMT_VPXI420"; break;
-        case VPX_IMG_FMT_I422: qDebug() << "Format: IMG_FMT_I422"; break;
-        case VPX_IMG_FMT_I444: qDebug() << "Format: IMG_FMT_I444"; break;
-        case VPX_IMG_FMT_I440: qDebug() << "Format: IMG_FMT_I440"; break;
-        case VPX_IMG_FMT_444A: qDebug() << "Format: IMG_FMT_444A"; break;
-        case VPX_IMG_FMT_I42016: qDebug() << "Format: IMG_FMT_I42016"; break;
-        case VPX_IMG_FMT_I42216: qDebug() << "Format: IMG_FMT_I42216"; break;
-        case VPX_IMG_FMT_I44416: qDebug() << "Format: IMG_FMT_I44416"; break;
-        case VPX_IMG_FMT_I44016: qDebug() << "Format: IMG_FMT_I44016"; break;
-      }
+        qDebug() << "Format : " << vpx_format_to_string(fmt); 
     }
 }
 

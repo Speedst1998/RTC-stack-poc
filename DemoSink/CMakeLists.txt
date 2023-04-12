@@ -29,14 +29,60 @@ find_package(Qt5Widgets REQUIRED)
 
 include(FetchContent)
 
+
+if(WIN32)
+message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+include(${CMAKE_CURRENT_SOURCE_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+else()
+
 FetchContent_Declare(
         libyuv
         GIT_REPOSITORY https://chromium.googlesource.com/libyuv/libyuv/
         GIT_TAG        stable
 )
 
+FetchContent_Declare(
+    libvpx
+    GIT_REPOSITORY https://github.com/webmproject/libvpx
+    GIT_TAG v1.13.0
+)
 FetchContent_MakeAvailable(libyuv)
+FetchContent_MakeAvailable(libvpx)
+endif()
 
-add_executable(DemoSink src/main.cpp src/SimpleUdpTransport.cpp src/SimpleUdpTransport.h src/ui/MainWindow.cpp src/ui/MainWindow.h src/vp8/VP8PacketCodecFactory.cpp src/vp8/VP8PacketCodecFactory.h src/vp8/VP8PacketReconstructor.cpp src/vp8/VP8PacketReconstructor.h)
-target_include_directories(DemoSink PUBLIC ${libyuv_SOURCE_DIR}/include)
-target_link_libraries(DemoSink PUBLIC RtpRtcp Qt5::Widgets vpx libyuv)
+
+set( SRCS
+    src/main.cpp
+    src/SimpleUdpTransport.cpp
+    src/SimpleUdpTransport.h
+    src/SimpleUdpTransportImpl.cpp
+    src/SimpleUdpTransportImpl.h
+    src/ui/MainWindow.cpp
+    src/ui/MainWindow.h
+    src/vp8/VP8PacketCodecFactory.cpp
+    src/vp8/VP8PacketCodecFactory.h
+    src/vp8/VP8PacketReconstructor.cpp
+    src/vp8/VP8PacketReconstructor.h
+ )
+
+if (WIN32)
+set( SRCS ${SRCS}
+    src/SimpleUdpTransportImpl_Win32.cpp
+    src/SimpleUdpTransportImpl_Win32.h
+    )
+set( LIBS ${LIBS}
+   ${CONAN_LIBS}
+)
+else ()
+set( SRCS ${SRCS}
+    src/SimpleUdpTransportImpl_Linux.cpp
+    src/SimpleUdpTransportImpl_Linux.h
+
+   )
+endif()
+
+
+add_executable(DemoSink ${SRCS} )
+target_include_directories(DemoSink PUBLIC ${libyuv_SOURCE_DIR}/include ${libvpx_SOURCE_DIR})
+target_link_libraries(DemoSink PUBLIC RtpRtcp Qt5::Widgets ${LIBS})

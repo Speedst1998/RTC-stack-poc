@@ -4,7 +4,7 @@
 #define RTPTRANSPORT_STATE_H
 namespace rtp {
     namespace transport {
-        enum State {
+        enum class State {
             kTransportNotReady, // Transport cannot send or receive
             kTransportRecvReady, // Transport can only receive
             kTransportSendReady, // Transport can only send

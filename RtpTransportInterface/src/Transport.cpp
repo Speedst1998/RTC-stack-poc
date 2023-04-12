@@ -6,7 +6,7 @@ namespace {
 
 namespace rtp {
     namespace transport {
-        Transport::Transport() : state(kTransportNotReady) {
+        Transport::Transport() : state(State::kTransportNotReady) {
 
         }
 
@@ -59,7 +59,7 @@ namespace rtp {
         void Transport::ReportError(const std::error_code &error_code) {
           // TODO: do something with the error
           fprintf(stderr, "Socket Error: %d, %s\n", error_code.value(), error_code.message().c_str());
-          SetNewState(kTransportClosed);
+          SetNewState(State::kTransportClosed);
         }
     }
 }

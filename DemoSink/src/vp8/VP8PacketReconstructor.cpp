@@ -68,8 +68,17 @@ namespace {
         uint8_t raw_value[3];
     };
 
+#ifdef __GNUC__
+#define PACK( __Declaration__ ) __Declaration__ __attribute__((__packed__))
+#endif
+
+#ifdef _MSC_VER
+#define PACK( __Declaration__ ) __pragma( pack(push, 1) ) __Declaration__ __pragma( pack(pop))
+#endif
+
+#pragma pack(push,1)
     union KeyframeHeader {
-        struct {
+        PACK(struct {
             uint32_t startCode : 24;
 
             uint16_t horiz : 14;
@@ -77,7 +86,7 @@ namespace {
 
             uint16_t vert : 14;
             uint8_t vertScale : 2;
-        } __attribute__((packed));
+        });
         uint8_t raw_value[7];
     };
 }
