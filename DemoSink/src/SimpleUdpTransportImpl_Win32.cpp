@@ -58,11 +58,13 @@ std::error_code SimpleUdpTransportImpl_Win32::ListenOn(uint16_t port) {
 	struct addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_DGRAM;
 	hints.ai_protocol = IPPROTO_UDP;
+	//hints.ai_protocol = SOCK_STREAM; // IPPROTO_UDP;
 	hints.ai_flags = AI_PASSIVE;
 	std::ostringstream ss;
 	ss << port << std::ends;
-	int iResult = getaddrinfo(NULL, ss.str().c_str(), &hints, &result);
+	int iResult = getaddrinfo(NULL, "27015", &hints, &result);
 	if (iResult != 0) {
 		std::cout << "getaddrinfo failed: " << iResult << std::endl;
 		WSACleanup();
@@ -74,6 +76,20 @@ std::error_code SimpleUdpTransportImpl_Win32::ListenOn(uint16_t port) {
 		WSACleanup();
 		return std::error_code(1, std::system_category());
 	}
+	struct sockaddr_in serverAddr;
+	short myport = 27015;
+
+	// Bind the socket to any address and the specified port.
+	serverAddr.sin_family = AF_INET;
+	serverAddr.sin_port = htons(myport);
+	// OR, you can do serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+	if (bind(socket_, (SOCKADDR*)&serverAddr, sizeof(serverAddr))) {
+		printf("bind failed with error %d\n", WSAGetLastError());
+		return std::error_code(1, std::system_category());
+	}
+	auto lastError = WSAGetLastError();
 
 	listening_ = false;
 	if (listeningThread_.joinable()) {

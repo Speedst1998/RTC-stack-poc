@@ -3,6 +3,7 @@
 #include <RtpRtcp/Session.h>
 #include <RtpRtcp/RtcpPacket.h>
 #include "RtpVideoSink.h"
+#include <iostream>
 
 namespace rtp {
     Session::Session()
@@ -63,10 +64,12 @@ namespace rtp {
     }
 
     bool Session::ParseRtpPacket(const std::vector<uint8_t> &&raw_data) {
+        std::cout << "Session::ParseRtpPacket() -begin " << std::endl;
       RtpPacket packet;
       if (!packet.ReadPacket(std::move(raw_data))) {
         // Unable to parse packet
-        return false;
+          std::cout << "Unable to read packet" << std::endl;
+          return false;
       }
 
       auto stream = findSinkStream(packet.SSRC());

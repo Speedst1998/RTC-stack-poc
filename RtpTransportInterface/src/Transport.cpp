@@ -1,4 +1,5 @@
 #include <RtpTransport/Transport.h>
+#include <iostream>
 
 namespace {
     constexpr auto kRtpVersion = 2;
@@ -11,7 +12,8 @@ namespace rtp {
         }
 
         void Transport::OnData(const std::vector<uint8_t> &&data) const {
-          // Figure out if we're dealing with RTP or RTCP
+            std::cout << "OnData size of bytes = " << data.size() << std::endl;
+            // Figure out if we're dealing with RTP or RTCP
           auto first_byte = data[0];
 
           // The version is common to every type

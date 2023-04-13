@@ -8,6 +8,7 @@
 #include "ui/MainWindow.h"
 #include "SimpleUdpTransport.h"
 #include "vp8/VP8PacketCodecFactory.h"
+#include <iostream>
 
 int main(int argc, char *argv[]) {
   QApplication qApplication(argc, argv);
@@ -53,7 +54,7 @@ int main(int argc, char *argv[]) {
       config.type = rtp::Stream::VIDEO;
       auto ptr = theSession.CreateSinkStream(config);
 
-      qDebug() << "Adding Stream with SSRC " << ssrc;
+      std::cout << "Adding Stream with SSRC " << ssrc << std::endl;
 
       if (auto stream = ptr.lock()) {
         stream->CompleteEncodedFrameCallback([&](std::unique_ptr<rtp::packetization::EncodedFrame> &&frame) {
